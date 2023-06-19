@@ -1,6 +1,7 @@
 import pytest
 from playwright.sync_api import Playwright, sync_playwright, expect
 
+import utils.secret_config
 # import utils.secret_config
 from pom.home_page_elements import HomePage
 
@@ -47,23 +48,24 @@ def test_run_2(set_up):
     expect(home_page.celebrate_body).to_be_visible()
     print("Pass")
 
-#  @pytest.mark.initial
-#  @pytest.mark.parametrize("email", [("Ahad-web")])
-#  @pytest.mark.parametrize("password", [(utils.secret_config.PASSWORD)])
-#  @pytest.mark.parametrize("password", [(os.environ.['PASSWORD'])])
-#  @pytest.mark.parametrize("email, password", [("Ahad-web" , utils.secret_config.PASSWORD)])
-# def test_github_login(set_up_git_login, email, password) -> None:
-#     page = set_up_git_login
-#     # browser = playwright.chromium.launch(headless=False, slow_mo=500)
-#     # context = browser.new_context()
-#     # page = context.new_page()
-#     # page.goto("https://github.com/")
-#     page.get_by_role("link", name="Sign in").click()
-#     page.get_by_label("Username or email address").click()
-#     page.get_by_label("Username or email address").fill(email)
-#     page.get_by_label("Username or email address").press("Tab")
-#     page.get_by_label("Password").fill(password)
-#     page.get_by_label("Password").press("Enter")
-#     page.get_by_role("button", name="View profile and more").click()
-#     page.get_by_role("menuitem", name="Sign out").click()
-#     print("Success")
+
+# @pytest.mark.initial
+# @pytest.mark.parametrize("email", [("Ahad-web")])
+# @pytest.mark.parametrize("password", [(utils.secret_config.PASSWORD)])
+# @pytest.mark.parametrize("password", [(os.environ.['PASSWORD'])])
+@pytest.mark.parametrize("email, password", [("alirana78662@gmail.com", utils.secret_config.PASSWORD)])
+def test_github_login(set_up_git_login, email, password) -> None:
+    page = set_up_git_login
+    # browser = playwright.chromium.launch(headless=False, slow_mo=500)
+    # context = browser.new_context()
+    # page = context.new_page()
+    # page.goto("https://github.com/")
+    page.get_by_role("link", name="Sign in").click()
+    page.get_by_label("Username or email address").click()
+    page.get_by_label("Username or email address").fill(email)
+    page.get_by_label("Username or email address").press("Tab")
+    page.get_by_label("Password").fill(password)
+    page.get_by_label("Password").press("Enter")
+    page.get_by_role("button", name="View profile and more").click()
+    page.get_by_role("menuitem", name="Sign out").click()
+    print("Success")
