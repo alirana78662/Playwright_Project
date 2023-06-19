@@ -1,9 +1,5 @@
 # from playwright.sync_api import Playwright, sync_playwright, expect
-import os
-
-from playwright.sync_api import Playwright, sync_playwright
-
-import utils.secret_config
+from playwright.sync_api import  Playwright, sync_playwright
 
 
 def test_run(playwright: Playwright) -> None:
@@ -13,8 +9,7 @@ def test_run(playwright: Playwright) -> None:
     page.goto("https://www.facebook.com/login/")
     page.wait_for_load_state("networkidle")
     page.locator("//input[@name='email']").fill("ahad123@gmail.com")
-    # page.locator("//input[@name='pass']").fill(utils.secret_config.PASSWORD)
-    page.locator("//input[@name='pass']").fill(os.environ["PASSWORD"])
+    page.locator("//input[@name='pass']").fill("test123")
     page.locator("//button[@name='login']").click()
     print("Login Success")
 

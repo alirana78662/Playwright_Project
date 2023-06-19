@@ -1,9 +1,18 @@
+import os
+
 import pytest
 from playwright.sync_api import Playwright, sync_playwright, expect
 
 import utils.secret_config
 # import utils.secret_config
 from pom.home_page_elements import HomePage
+
+try:
+    PASSWORD = os.environ["PASSWORD"]
+except KeyError:
+    import utils.secret_config
+
+    PASSWORD = utils.secret_config.PASSWORD
 
 
 @pytest.mark.smoke
@@ -64,8 +73,8 @@ def test_github_login(set_up_git_login, email, password) -> None:
     page.get_by_label("Username or email address").click()
     page.get_by_label("Username or email address").fill(email)
     page.get_by_label("Username or email address").press("Tab")
-    page.get_by_label("Password").fill(password)
+    page.get_by_label("Password").fill(PASSWORD)
     page.get_by_label("Password").press("Enter")
-    page.get_by_role("button", name="View profile and more").click()
-    page.get_by_role("menuitem", name="Sign out").click()
+    # page.get_by_role("button", name="View profile and more").click()
+    # page.get_by_role("menuitem", name="Sign out").click()
     print("Success")
