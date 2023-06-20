@@ -1,4 +1,5 @@
 import os
+import time
 
 import pytest
 from playwright.sync_api import Playwright, sync_playwright, expect
@@ -7,12 +8,14 @@ import utils.secret_config
 # import utils.secret_config
 from pom.home_page_elements import HomePage
 
-try:
-    PASSWORD = os.environ["PASSWORD"]
-except KeyError:
-    import utils.secret_config
+PASSWORD = os.environ["PASSWORD"]
 
-    PASSWORD = utils.secret_config.PASSWORD
+# try:
+#     PASSWORD = os.environ["PASSWORD"]
+# except KeyError:
+#     import utils.secret_config
+#
+#     PASSWORD = utils.secret_config.PASSWORD
 
 
 @pytest.mark.smoke

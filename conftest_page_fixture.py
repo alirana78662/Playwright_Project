@@ -1,7 +1,7 @@
-import time
-
 import pytest
 from playwright.sync_api import Playwright
+
+
 
 
 @pytest.fixture
@@ -55,59 +55,16 @@ def contact_page_fill(set_up):
 
     yield page
 
-# this code is for open multiple browsers while running your test
-
-# @pytest.fixture(scope='session')
-# def context_creation(playwright):
-#     # # Access
-#     browser = playwright.chromium.launch(headless=False, slow_mo=300)
-#     context = browser.new_context()
-#     # # Open new page
-#     page = context.new_page()
-#     page.goto("https://github.com/")
-#     page.set_default_timeout(3000)
-#
-#     yield context
-#     time.sleep(5)
-#
-#
-# @pytest.fixture()
-# def set_up_git_login(context_creation):
-#     context = context_creation
-#     page = context.new_page()
-#     page.goto("https://github.com/")
-#     page.set_default_timeout(3000)
-#
-#     yield page
-#     time.sleep(3)
-#     page.close()
-
-
-# this code is using for multiple windows open and create storage state in form of json file....
-@pytest.fixture(scope='session')
-def context_creation(playwright):
-    # # Access
-    browser = playwright.chromium.launch(headless=False, slow_mo=300)
-    context = browser.new_context()
-    # # Open new page
-    page = context.new_page()
-    page.goto("https://github.com/")
-    page.set_default_timeout(3000)
-    # page.wait_for_load_state("Networkidle")
-    time.sleep(2)
-    context.storage_state(path='state.json')
-
-    yield context
-    time.sleep(5)
-
 
 @pytest.fixture()
-def set_up_git_login(context_creation, browser):
-    context = browser.new_context(storage_state='state.json')
-    page = context.new_page()
+def set_up_git_login(page):
+    # # Access
+    # browser = playwright.chromium.launch(headless=False, slow_mo=500)
+    # context = browser.new_context()
+    # # Open new page
+    # page = context.new_page()
     page.goto("https://github.com/")
     page.set_default_timeout(3000)
 
     yield page
-    time.sleep(3)
     page.close()
